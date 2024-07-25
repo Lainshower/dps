@@ -10,6 +10,7 @@ from itertools import combinations
 import yaml
 from pyspark import SparkContext
 from pyspark.rdd import RDD
+from pyspark.storagelevel import StorageLevel
 
 from dps.spark.spark_session import spark_session
 from dps.spark.utils.io_utils import read_line, to_json
@@ -66,7 +67,7 @@ def dedup_job(config_path):
             .flatMap(read_line)
             .cache()
         )
-
+        #proc_rdd.persist(StorageLevel.MEMORY_ONLY)
         overlap_kv_rdd: RDD = (
             proc_rdd.flatMap(
                 lambda x: expand_instances_by_minhash(
@@ -83,9 +84,9 @@ def dedup_job(config_path):
             )
             .distinct()
             .map(lambda x: (x, dict(text=x)))
-            .cache()
+           .cache()
         )
-
+        # overlap_kv_rdd.persist(StorageLevel.MEMORY_ONLY)
         proc_rdd.map(lambda x: (x["text"], x)).subtractByKey(overlap_kv_rdd).map(
             lambda x: x[1]
         ).repartition(conf["n_output"]).flatMap(to_json).saveAsTextFile(

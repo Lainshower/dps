@@ -53,6 +53,7 @@ def jaccard_by_hashvalues(src_hashvalues, tgt_hashvalues) -> float:
     if len(src_hashvalues) != len(tgt_hashvalues):
         raise ValueError()
 
-    return np.float(np.count_nonzero(src_hashvalues == tgt_hashvalues)) / np.float(
-        len(src_hashvalues)
-    )
+    return float(np.count_nonzero(src_hashvalues == tgt_hashvalues)) / float(np.size(src_hashvalues))
+    # return np.float(np.count_nonzero(src_hashvalues == tgt_hashvalues)) / np.float(
+    #     len(src_hashvalues)
+    # )

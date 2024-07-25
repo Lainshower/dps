@@ -1,7 +1,11 @@
 pyspark==3.2.1
 fire==0.3.1
-pyyaml
+pyyaml>=6.0
 bs4
 html2text
 python-stdnum
 numpy
+sudachipy
+sudachidict_core
+
+# pip install boto3>=1.26 fasttext>=0.9 filelock>=3.12 pandas>=2.0 pyarrow>=12.0

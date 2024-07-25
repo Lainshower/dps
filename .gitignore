@@ -389,3 +389,6 @@ dmypy.json
 
 /*.bz2
 /data
+
+### OUR PROJECT - LEGAL DAPT
+/legal-project-data
