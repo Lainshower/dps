@@ -67,7 +67,7 @@ def dedup_job(config_path):
             .flatMap(read_line)
             .cache()
         )
-        #proc_rdd.persist(StorageLevel.MEMORY_ONLY)
+        # proc_rdd.persist(StorageLevel.MEMORY_ONLY)
         overlap_kv_rdd: RDD = (
             proc_rdd.flatMap(
                 lambda x: expand_instances_by_minhash(
@@ -82,7 +82,7 @@ def dedup_job(config_path):
             .flatMap(
                 lambda x: explore_dedup_instance(x[1], threshold=conf["sim_threshold"])
             )
-            .distinct()
+            .distinct(numPartitions=conf.get("distinct_partitions", 500))
             .map(lambda x: (x, dict(text=x)))
            .cache()
         )
