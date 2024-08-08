@@ -8,7 +8,6 @@ MERSENNE_PRIME = (1 << 61) - 1
 MAX_HASH = (1 << 32) - 1
 HASH_RANGE = 1 << 32
 
-
 def shingle_word(text: str, n_gram: int = 15, char_level: bool = False) -> List[str]:
     res = []
     text_words = text.split() if not char_level else text

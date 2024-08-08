@@ -1,9 +1,10 @@
 base_dir: './legal-project-data'
 targets: 
-    - kowiki-data-json
+    - kowiki-data-json-split
 output_dir: './legal-project-data/General_First_Dedup_WIKI'
 
-n_dist: 30
+n_dist: 500
+min_length: 8
 n_output: 1
 num_expand: 10
 sim_threshold: 0.8

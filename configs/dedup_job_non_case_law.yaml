@@ -1,0 +1,14 @@
+base_dir: './legal-project-data'
+targets: 
+    - Non-Case-Law
+
+output_dir: './legal-project-data/DOMAIN_First_Dedup_NON_CASE_LAW'
+
+n_dist: 500
+min_length: 4
+n_output: 1
+num_expand: 30
+sim_threshold: 0.8
+n_gram: 4
+char_level: false
+seed: 1

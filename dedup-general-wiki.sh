@@ -4,9 +4,9 @@ SPARK_HOME=/opt/spark
 
 $SPARK_HOME/bin/spark-submit \
   --master spark://222.231.24.44:7077 \
-  --conf spark.executor.instances=32 \
+  --conf spark.executor.instances=40 \
   --conf spark.executor.cores=8 \
-  --conf spark.executor.memory=24g \
+  --conf spark.executor.memory=16g \
   --conf spark.executor.memoryOverhead=4g \
   --conf spark.driver.memory=48g \
   --conf "spark.executor.extraJavaOptions=-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=35" \
@@ -21,8 +21,8 @@ $SPARK_HOME/bin/spark-submit \
   --conf spark.shuffle.service.enabled=true \
   --conf spark.sql.shuffle.partitions=1000 \
   --conf spark.shuffle.compress=true \
-  --conf spark.shuffle.file.buffer=64k \
-  --conf spark.reducer.maxSizeInFlight=48m \
-  --conf spark.locality.wait=3s \
+  --conf spark.shuffle.file.buffer=128k \
+  --conf spark.reducer.maxSizeInFlight=96m \
+  --conf spark.locality.wait=10s \
   /home/kaoara/dps/bin/sparkapp.py dedup_job \
   --config_path=/home/kaoara/dps/configs/dedup_job_wiki.yaml

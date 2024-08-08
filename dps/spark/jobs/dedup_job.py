@@ -63,11 +63,11 @@ def dedup_job(config_path):
 
         proc_rdd: RDD = (
             sc.textFile(input_paths)
-            .repartition(conf["n_dist"])
             .flatMap(read_line)
+            .filter(lambda x: len(x['text'].split()) >= conf["min_length"]) # Only For WIKI/CODE
+            .repartition(conf["n_dist"])
             .cache()
         )
-        # proc_rdd.persist(StorageLevel.MEMORY_ONLY)
         overlap_kv_rdd: RDD = (
             proc_rdd.flatMap(
                 lambda x: expand_instances_by_minhash(
@@ -82,11 +82,10 @@ def dedup_job(config_path):
             .flatMap(
                 lambda x: explore_dedup_instance(x[1], threshold=conf["sim_threshold"])
             )
-            .distinct(numPartitions=conf.get("distinct_partitions", 500))
+            .distinct()
             .map(lambda x: (x, dict(text=x)))
-           .cache()
+            .cache()
         )
-        # overlap_kv_rdd.persist(StorageLevel.MEMORY_ONLY)
         proc_rdd.map(lambda x: (x["text"], x)).subtractByKey(overlap_kv_rdd).map(
             lambda x: x[1]
         ).repartition(conf["n_output"]).flatMap(to_json).saveAsTextFile(

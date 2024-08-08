@@ -27,5 +27,4 @@ $SPARK_HOME/bin/spark-submit \
   --conf spark.memory.fraction=0.6 \
   --conf spark.memory.storageFraction=0.4 \
   /home/kaoara/dps/bin/sparkapp.py dedup_job \
-  --config_path=/home/kaoara/dps/configs/dedup_job_code.yaml
-
+  --config_path=/home/kaoara/dps/configs/dedup_job_non_case_law.yaml

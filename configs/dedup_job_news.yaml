@@ -11,6 +11,7 @@ targets:
 output_dir: './legal-project-data/General_First_Dedup_NEWS'
 
 n_dist: 30
+min_length: 8
 n_output: 1
 num_expand: 10
 sim_threshold: 0.8
