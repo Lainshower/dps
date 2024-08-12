@@ -2,13 +2,13 @@ base_dir: './legal-project-data'
 targets: 
     - github-data
 
-output_dir: './legal-project-data/General_First_Dedup_CODE'
+output_dir: './legal-project-data/General_First_Dedup_CODE_10'
 
 n_dist: 1000
-min_length: 14
+min_length: 10
 n_output: 1
 num_expand: 10
 sim_threshold: 0.8
-n_gram: 14
+n_gram: 10
 char_level: false
 seed: 1

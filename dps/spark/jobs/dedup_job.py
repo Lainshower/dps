@@ -20,6 +20,12 @@ from dps.spark.prep.dedup_prep import (
     jaccard_by_hashvalues,
 )
 
+def filter_condition(x):
+    try:
+        return len(x['text'].split()) >= conf["min_length"]
+    except Exception as e:
+        print(f"Error processing record {x}: {e}")
+        return False
 
 def expand_instances_by_minhash(
     data, expand_size: int, n_gram: int, seed: int = 1, char_level: bool = False
@@ -64,7 +70,8 @@ def dedup_job(config_path):
         proc_rdd: RDD = (
             sc.textFile(input_paths)
             .flatMap(read_line)
-            .filter(lambda x: len(x['text'].split()) >= conf["min_length"]) # Only For WIKI/CODE
+            .filter(lambda x: len(x['text'].split()) >= conf["min_length"])
+            # .filter(lambda x: len(x['text'].split("\n")) >= conf["min_length"])
             .repartition(conf["n_dist"])
             .cache()
         )
