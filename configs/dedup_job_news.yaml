@@ -8,12 +8,13 @@ targets:
     - MODU_NEWSPAER_2023_v1.0-filtered-json
     - naver-news
 #output_dir: '/data/llmlaw/FIRST_DEDUPLICATION//General_First_Dedup_WO_CODE'
-output_dir: './legal-project-data/General_First_Dedup_NEWS'
+output_dir: './legal-project-data/General_First_Dedup_NEWS_0.7'
 
 n_dist: 30
+min_length: 8
 n_output: 1
-num_expand: 10
-sim_threshold: 0.8
+num_expand: 30
+sim_threshold: 0.7
 n_gram: 8
 char_level: false
 seed: 1
