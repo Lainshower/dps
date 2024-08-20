@@ -1,13 +1,31 @@
+### First Dedup
+
+# base_dir: './legal-project-data'
+# targets: 
+#     - kowiki-data-json-split
+# output_dir: './legal-project-data/General_First_Dedup_WIKI'
+
+# n_dist: 500
+# min_length: 8
+# n_output: 1
+# num_expand: 10
+# sim_threshold: 0.8
+# n_gram: 8
+# char_level: false
+# seed: 1
+
+### Second Dedup
+
 base_dir: './legal-project-data'
 targets: 
-    - kowiki-data-json-split
-output_dir: './legal-project-data/General_First_Dedup_WIKI'
+    - General_Preprocessed_WIKI
+output_dir: './legal-project-data/General_SECOND_Dedup_WIKI_8_0.85'
 
 n_dist: 500
 min_length: 8
 n_output: 1
 num_expand: 10
-sim_threshold: 0.8
+sim_threshold: 0.85
 n_gram: 8
 char_level: false
 seed: 1
