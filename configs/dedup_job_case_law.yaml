@@ -1,8 +1,9 @@
 base_dir: './legal-project-data'
-targets: 
-    - Case-Law
 
-output_dir: './legal-project-data/DOMAIN_First_Dedup_CASE_LAW_0.8_16'
+targets: 
+    - CASE-LAW
+
+output_dir: './legal-project-data/DOMAIN_First_Dedup_CASE_LAW_kwr_0.75'
 
 n_dist: 500
 min_length: 16
@@ -12,3 +13,17 @@ sim_threshold: 0.8
 n_gram: 16
 char_level: false
 seed: 1
+
+min_doc_len: 36
+max_doc_len: 299675
+
+min_mean_word_len: 3
+max_mean_word_len: 10
+
+symbol_to_word_ratio: 0.1
+
+bullet_point_ratio: 0.9
+ellipsis_ratio: 0.3
+
+korean_word_ratio: 0.75
+is_cluster: false
