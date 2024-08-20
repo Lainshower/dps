@@ -1,0 +1,17 @@
+base_dir: './legal-project-data'
+targets: 
+    - General_First_Dedup_WIKI
+
+output_dir: './legal-project-data/General_Preprocessed_WIKI_SYM_0.1_KWR_0.3'
+
+n_dist: 100
+n_output: 1
+is_cluster: False
+min_doc_len: 50
+max_doc_len: 100000
+min_mean_word_len: 3
+max_mean_word_len: 10
+symbol_to_word_ratio: 0.1
+bullet_point_ratio: 0.9
+ellipsis_ratio:  0.3
+korean_word_ratio: 0.3

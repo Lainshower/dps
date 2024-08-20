@@ -17,6 +17,7 @@ from dps.spark.prep.korean_prep import (
     remove_html_tags,
     bad_words_filter,
     make_compat,
+    remove_korean_news_pattern, # [Joonwon]
 )
 from dps.spark.prep.lang_agnostic_prep import (
     doc_len_filter,
@@ -41,6 +42,7 @@ def preprocess_text(input_text: str):
         replace_korean_pii,
         spam_words_filter,
         remove_html_tags,
+        # remove_korean_news_pattern, # [Joonwon] - Only for Korean NEWS
         remove_repeated_text,
     ]
 

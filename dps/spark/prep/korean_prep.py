@@ -27,6 +27,8 @@ from dps.spark.utils.korean_utils import (
     RRN_PATTERN,
     ACCOUNT_PATTERN,
     BAD_WORDS,
+    KOREAN_NEWS_REMOVE, # [Joonwon]
+    KOREAN_NEWS_PATTERN, # [Joonwon]
 )
 from dps.spark.utils.lang_agnostic_utils import (
     URL_PATTERN,
@@ -55,7 +57,7 @@ def korean_word_ratio_filter(text, korean_word_ratio):
     )
 
 
-def reduce_emoticon(text: str, num_repeats=2):
+def reduce_emoticon(text: str, num_repeats=2): # [Joonwon] 3 for news
     """
     Original Code
     https://github.com/lovit/soynlp/blob/master/soynlp/normalizer/_normalizer.py
@@ -217,6 +219,8 @@ def spam_words_filter(text):
     """Remove spam words from the given input text"""
     for pattern, repl in SPAM_REMOVE:
         text = re.sub(pattern, repl, text)
+    for pattern, repl in KOREAN_NEWS_REMOVE: # [Joonwon]
+        text = re.sub(pattern, repl, text)
     for pattern in SPAM_SPLIT:
         text = re.split(pattern, text, maxsplit=1)[0]
     return text.strip()
@@ -251,4 +255,12 @@ def make_compat(text):
     # code by kyubyong park
     text = unicodedata.normalize("NFC", text)
     text = re.sub("[\u1100-\u11FF]", "", text)
+    return text
+
+# [Joonwon] - NEWS
+def remove_korean_news_pattern(text):
+    for pattern, repl in KOREAN_NEWS_REMOVE:
+        text = re.sub(pattern, repl, text) 
+    for pattern in KOREAN_NEWS_PATTERN.values(): 
+        text = pattern.sub('', text)
     return text
