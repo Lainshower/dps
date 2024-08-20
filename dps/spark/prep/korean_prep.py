@@ -27,11 +27,15 @@ from dps.spark.utils.korean_utils import (
     RRN_PATTERN,
     ACCOUNT_PATTERN,
     BAD_WORDS,
+    LAWYER_PATTERN,  # * [Seonghee]
+    LAW_FIRM_PATTERN,  # * [Seonghee]
+    CORP_PATTERN,  # * [Seonghee]
 )
 from dps.spark.utils.lang_agnostic_utils import (
     URL_PATTERN,
     EMAIL_PATTERN,
     replace_with_token,
+    replace_text_with_x, # * [Seonghee]
 )
 from dps.spark.utils.token_utils import (
     URL_START_TOKEN,
@@ -237,8 +241,20 @@ def replace_korean_pii(text: str):
         PHONE_NUMBER_END_TOKEN,
         replaces,
     )
-    text = replace_with_token(
-        text, ACCOUNT_PATTERN, ACCOUNT_START_TOKEN, ACCOUNT_END_TOKEN, replaces
+
+    # text = replace_with_token( # ! [24.08.20] [Seonghee] CASE-LAW에서 YYYY-MM-DD가 ACCOUNT_PATTERN에 포함되는 문제 존재 -> Domain (CASE/NON-CASE) 전처리 할 때만 Line 240~242 주석 처리하기
+    #     text, ACCOUNT_PATTERN, ACCOUNT_START_TOKEN, ACCOUNT_END_TOKEN, replaces
+    # )
+
+    # * [Seonghee] 변호사, 로펌, 주식회사 등을 XX, XXX, XXXX 중 하나로 비식별화
+    text = replace_text_with_x(
+        text, LAWYER_PATTERN
+    )
+    text = replace_text_with_x(
+        text, LAW_FIRM_PATTERN
+    )
+    text = replace_text_with_x(
+        text, CORP_PATTERN
     )
 
     for before, after in replaces:

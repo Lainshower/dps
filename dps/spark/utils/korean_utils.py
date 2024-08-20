@@ -205,6 +205,15 @@ ACCOUNT_PATTERN = re.compile(
     + r"([0-9]\d{12})|([0-9]\d{10})|([0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{2,7})"  # KAKAO
 )
 
+# * [Seonghee] LAWYER NAME
+LAWYER_PATTERN = re.compile(r"(변호사)\s[가-힣]{2,4}")
+
+# * [Seonghee] LAW FIRM NAME
+LAW_FIRM_PATTERN = re.compile(r"(법무법인(?:\([^)]+\))?)\s[가-힣]{2,8}")
+
+# * [Seonghee] CORPORATE NAME
+CORP_PATTERN = re.compile(r"(주식회사)\s[가-힣]+")
+
 # SPAM FILTERING
 _NEWS = [
     f"{prefix}{word}"
@@ -309,6 +318,11 @@ SPAM_REMOVE = [
         # 사진=연합뉴스
         re.compile("\(+.+=연합뉴스\)+.+(기자 =|특파원 =)|=연합뉴스|"),
         "",
+    ),
+    (
+        # * [Seonghee] "주문과 같이 판결한다." 이후의 모든 텍스트 제거
+        re.compile(r"(주문과 같이 판결한다\.).*"),
+        r"주문과 같이 판결한다."
     )
 ]
 

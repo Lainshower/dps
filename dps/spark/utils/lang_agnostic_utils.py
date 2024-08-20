@@ -129,6 +129,17 @@ URL2_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+# * [Seonghee]
+def replace_text_with_x(text, pattern):
+    """Replaces matched text with 'X' repeated according to the length of the matched name."""
+    def custom_replace(match):
+        # Get the length of the matched text and calculate the number of 'X's
+        matched_text = match.group(1)
+        x_count = min(4, max(2, len(matched_text)))  # Ensure x_count is between 2 and 4
+        return f"{match.group(1)} {'X' * x_count}"
+
+    # Apply the replacement
+    return re.sub(pattern, custom_replace, text)
 
 def replace_with_token(text, pattern, start, end, replaces, random_number=True):
     def replace_number(match):
