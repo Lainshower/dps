@@ -23,7 +23,7 @@ base_dir: './legal-project-data'
 targets: 
     - General_Preprocessed_NEWS
 
-output_dir: './legal-project-data/General_Second_Dedup_NEWS_0.8'
+output_dir: './legal-project-data/General_Second_Dedup_NEWS_8_0.8'
 
 n_dist: 30
 min_length: 8
