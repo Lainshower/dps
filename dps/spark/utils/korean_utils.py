@@ -180,7 +180,7 @@ HTML_SPLIT = [
 
 # PHONE NUMBER
 PHONE_NUMBER_PATTERN = re.compile(
-    r"([0-9]{2,3}-[0-9]{3,4}-[0-9]{4})|([0-9]{2,3}[0-9]{3,4}[0-9]{4})"
+    r"([0-9]{2,3}-[0-9]{2,4}-[0-9]{2,4})|(\([0-9]{2,3}\)[0-9]{2,4}[0-9]{2,4})"
 )
 
 # RRN
@@ -365,3 +365,95 @@ BAD_WORDS = [
     "먹튀사이트",
     "먹튀 사이트",
 ]
+
+# [Joonwon] - NEWS
+KOREAN_NEWS_REMOVE = [
+    (
+        # [Joonwon]
+        re.compile(
+            r"EBN산업뉴스|e대한경제|강원도민일보|강원일보|경기일보|경남도민일보|"
+            r"경북일보|경상일보|경인일보|경향신문|광주매일신문|광주일보|국민일보|"
+            r"국제신문|기호일보|남도일보|내일신문|노컷뉴스|뉴스핌|대구신문|대구일보|"
+            r"대전일보|동양일보|매일신문|머니투데이|무등일보|미디어오늘|부산일보|"
+            r"서울경제|서울신문|세계일보|스포츠서울|스포츠일간|아시아경제|아주경제|"
+            r"영남일보|울산매일신문|이데일리|이투데이|인천일보|전남일보|전북도민일보|"
+            r"전북일보|전자신문|제민일보|조선일보|중도일보|중부매일|중부일보|충북일보|"
+            r"충청일보|충청 일보|충청투데이|파이낸셜뉴스|한겨레|한국경제|한국일보|"
+            r"한라일보|헤럴드경제|환경일보|연합뉴스|(PG)"
+            r"( TV)?",
+            re.IGNORECASE
+        ),
+        "",
+    ),
+]
+
+# [Joonwon] - NEWS
+KOREAN_NEWS_PATTERN = {
+    "email_and_symbols": re.compile(
+        r"(\sⓒ\s?\([^\)]+\))|"  # ⓒ (email)
+        r"(\w+@\(이메일\))|"    # Placeholder for email
+        r"([^\s]+@(이메일))|"  # Email removal with placeholder
+        r"전화\s?\b\d{2,3}[-]\d{3,4}[-]\d{4}\b|"       
+        r"이메일\s?\b\S+@\S+\.\S+\b|"                  
+        r"\w+\s?\@\w+|"  
+        r"\b\d{2,3}[-]\d{3,4}[-]\d{4}\b|"    
+        r"\b\S+@\S+\.\S+\b|"                 
+        r"\@\w+",                             
+        flags=re.IGNORECASE
+    ),
+    "news_references": re.compile(
+        r"\((서울|[^\s\)]+)\s?=\s?[^\)]*\)|"     # (서울=Text) or (Word=Text)
+        r"\[\w+\s?=\s?\w*\]|"                   # [Word=Word] or [Word=]
+        r"【[^\】]*】|"                          # 【Content】 or 【】
+        r"© [^\s]* 뉴스|"                       # News copyright
+        r"무단 전재 및 재배포 금지|"            # Redistribution prohibition
+        r"\<저작권자ⓒ [^\>]*\>|"               # Copyright notices
+        r"\[[^\]]*\]|"                          # [Any=Text] or [Any=] general location or info
+        r"\(\w+\s?=\s?[\w\s]*\)",               # (글자=글자 or 공백) or (글자=)
+        flags=re.IGNORECASE
+    ),
+    "article_references": re.compile(
+        r"(\[사진 [^\]]+\])|"          # [Picture] tags
+        r"(\[포토\])|"                # [Photo] tags
+        r"(\[동영상\])|"              # [Video] tags
+        r"\<사진=.*?\>|"
+        r"\<비디오=.*?\>|"
+        r"\<동영상=.*?\>|"
+        r"('호에 실린 기사')|"
+        r"\d+호에 실린 기사|"
+        r"☞ 본 기사는.*",
+        flags=re.IGNORECASE
+    ),
+    "journalist_names": re.compile(
+    r"\b\w+ ?= ?\w+ 기자|"               # Matches "Name = Name 기자", "Name=Name 기자"
+    r"\b\w+ 기자 ?=|"                    # Matches "Name 기자 =", "Name 기자="
+    r"\([^\)]+\) 기자 ?=|"               # Matches "(Name) 기자 =", "(Name) 기자="
+    r"\b[a-zA-Z가-힣]+ 기자|"            # Matches "Name 기자"
+    r"TV\s*.{2,7}\.|"
+    r"◀ ?\w+ ?▶",                        # Matches "◀ Name ▶", "◀Name▶"
+        flags=re.IGNORECASE
+    ),
+    "copyright": re.compile(
+        r"\<저작권자\s*© [^\>]+\>|"                              # <Copyright Owner ⓒ ... >
+        r"저작권자[ ©]+\s+[^\s,]+, 무단전재 및 재배포 금지|"      # Broad pattern for copyright notices
+        r"뉴스[0-9]+코리아|"                                     # Patterns like News1Korea
+        r"공감언론 뉴시스|"                                      # Specific news outlet
+        r"[a-zA-Z가-힣]+ 뉴스|"                                  # General news media mention
+        r"[a-zA-Z가-힣]+ 통신사|"                                # Communication companies
+        r"[a-zA-Z가-힣]+방송",                                   # Broadcasting companies
+        flags=re.IGNORECASE
+    ),
+    "promotional_content": re.compile(
+        r"#[^\s]{1,7}|"
+        r"^\[.*?\]",                 # Removing text within brackets at the start of the each line
+        flags=re.IGNORECASE | re.MULTILINE
+    ),
+    "symbol_cleanup": re.compile(
+        r"▶\.?|◎\.?|▷\.?|\(?<\|(?!.*\w)|(?<!\w)\|>\)?$",                   # Removing '▶' and everything after it in the line
+        flags=re.IGNORECASE | re.MULTILINE
+    ),
+    "inquiry_and_tip_off": re.compile(
+        r"\b[a-zA-Z가-힣]*\s*기사\s?문의 및 제보\s*:\s*.+",
+        flags=re.IGNORECASE
+    )
+}
