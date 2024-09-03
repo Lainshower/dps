@@ -394,3 +394,4 @@ dmypy.json
 /legal-project-data
 /eventLog
 *.jsonl
+*.png
