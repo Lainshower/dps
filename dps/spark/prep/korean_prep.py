@@ -30,6 +30,8 @@ from dps.spark.utils.korean_utils import (
     LAWYER_PATTERN,  # * [Seonghee]
     LAW_FIRM_PATTERN,  # * [Seonghee]
     CORP_PATTERN,  # * [Seonghee]
+    PROSECUTOR_PATTERN,  # * [Seonghee]
+    JUDGE_PATTERN, # * [Seonghee]
     KOREAN_NEWS_REMOVE, # [Joonwon]
     KOREAN_NEWS_PATTERN, # [Joonwon]
 )
@@ -250,7 +252,7 @@ def replace_korean_pii(text: str):
     #     text, ACCOUNT_PATTERN, ACCOUNT_START_TOKEN, ACCOUNT_END_TOKEN, replaces
     # )
 
-    # * [Seonghee] 변호사, 로펌, 주식회사 등을 XX, XXX, XXXX 중 하나로 비식별화
+    # * [Seonghee] 변호사, 로펌, 주식회사, 검사, 판사 이름 등을 XX, XXX, XXXX 중 하나로 비식별화
     text = replace_text_with_x(
         text, LAWYER_PATTERN
     )
@@ -259,6 +261,14 @@ def replace_korean_pii(text: str):
     )
     text = replace_text_with_x(
         text, CORP_PATTERN
+    )
+
+    text = replace_text_with_x(
+        text, PROSECUTOR_PATTERN
+    )
+
+    text = replace_text_with_x(
+        text, JUDGE_PATTERN
     )
 
     for before, after in replaces:

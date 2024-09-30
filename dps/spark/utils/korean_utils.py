@@ -214,6 +214,12 @@ LAW_FIRM_PATTERN = re.compile(r"(법무법인(?:\([^)]+\))?)\s[가-힣]{2,8}")
 # * [Seonghee] CORPORATE NAME
 CORP_PATTERN = re.compile(r"(주식회사)\s[가-힣]+")
 
+# * [Seonghee] PROSECUTOR NAME
+PROSECUTOR_PATTERN = re.compile(r"(검\s*사)\s[가-힣]{2,4}")
+
+# * [Seonghee] JUDGE NAME
+JUDGE_PATTERN = re.compile(r"(판\s*사)\s[가-힣]{2,4}")
+
 # SPAM FILTERING
 _NEWS = [
     f"{prefix}{word}"
