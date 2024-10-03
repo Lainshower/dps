@@ -6,9 +6,9 @@ $SPARK_HOME/bin/spark-submit \
   --master spark://222.231.24.44:7077 \
   --conf spark.executor.instances=40 \
   --conf spark.executor.cores=8 \
-  --conf spark.executor.memory=64g \
-  --conf spark.executor.memoryOverhead=8g \
-  --conf spark.driver.memory=64g \
+  --conf spark.executor.memory=96g \
+  --conf spark.executor.memoryOverhead=16g \
+  --conf spark.driver.memory=96g \
   --conf "spark.executor.extraJavaOptions=-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=35" \
   --conf "spark.driver.extraJavaOptions=-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=35" \
   --conf spark.eventLog.enabled=true \
@@ -26,5 +26,5 @@ $SPARK_HOME/bin/spark-submit \
   --conf spark.locality.wait=10s \
   --conf spark.memory.fraction=0.6 \
   --conf spark.memory.storageFraction=0.4 \
-  /home/kaoara/dps/bin/sparkapp.py dedup_job \
-  --config_path=/home/kaoara/dps/configs/dedup_non_case_law.yaml
+  /home/kaoara/dps/bin/sparkapp.py korean_job \
+  --config_path=/home/kaoara/dps/configs/korean_case_law_job.yaml \

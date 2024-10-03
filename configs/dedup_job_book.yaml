@@ -1,14 +1,14 @@
 base_dir: './legal-project-data'
 targets: 
-    - Case-Law
+    - Domain-Book
 
-output_dir: './legal-project-data/Domain_First_Dedup_CASE_LAW_0.8_16'
+output_dir: './legal-project-data/Domain_First_Dedup_BOOK_0.8_16'
 
 n_dist: 500
-min_length: 16
+min_length: 20
 n_output: 1
 num_expand: 30
 sim_threshold: 0.8
-n_gram: 16
+n_gram: 20
 char_level: false
 seed: 1
