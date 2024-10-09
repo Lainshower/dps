@@ -2,16 +2,16 @@ base_dir: './legal-project-data'
 targets: 
     - Domain_First_Dedup_BOOK_0.8_16
 
-output_dir: './legal-project-data/Domain_Preprocessed_BOOK_SYM_0.1_KWR_0.8'
+output_dir: './legal-project-data/Domain_Preprocessed_BOOK_SYM_0.3_KWR_0.75'
 
 n_dist: 100
 n_output: 1
 is_cluster: False
 min_doc_len: 50
-max_doc_len: 100000
+max_doc_len: 230000
 min_mean_word_len: 3
 max_mean_word_len: 10
-symbol_to_word_ratio: 0.1
+symbol_to_word_ratio: 0.3
 bullet_point_ratio: 0.9
 ellipsis_ratio:  0.3
-korean_word_ratio: 0.8
+korean_word_ratio: 0.75
