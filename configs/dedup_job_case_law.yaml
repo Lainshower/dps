@@ -1,6 +1,6 @@
 base_dir: './legal-project-data'
 targets: 
-    - Case-Law
+    - Domain-Case-Law
 
 output_dir: './legal-project-data/Domain_First_Dedup_CASE_LAW_0.8_16'
 
