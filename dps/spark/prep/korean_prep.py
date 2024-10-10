@@ -240,15 +240,15 @@ def replace_korean_pii(text: str):
     text = replace_with_token(
         text, RRN_PATTERN, RRN_START_TOKEN, RRN_END_TOKEN, replaces
     )
-    text = replace_with_token(
-        text,
-        PHONE_NUMBER_PATTERN,
-        PHONE_NUMBER_START_TOKEN,
-        PHONE_NUMBER_END_TOKEN,
-        replaces,
-    )
+    # text = replace_with_token( # ! [24.10.10] [Seonghee] domain 전처리 시에만 주석 처리하기
+    #     text,
+    #     PHONE_NUMBER_PATTERN,
+    #     PHONE_NUMBER_START_TOKEN,
+    #     PHONE_NUMBER_END_TOKEN,
+    #     replaces,
+    # )
 
-    # text = replace_with_token( # ! [24.08.20] [Seonghee] CASE-LAW에서 YYYY-MM-DD가 ACCOUNT_PATTERN에 포함되는 문제 존재 -> Domain (CASE/NON-CASE) 전처리 할 때만 Line 240~242 주석 처리하기
+    # text = replace_with_token( # ! [24.08.20] [Seonghee] domain 전처리 시에만 주석 처리하기
     #     text, ACCOUNT_PATTERN, ACCOUNT_START_TOKEN, ACCOUNT_END_TOKEN, replaces
     # )
 
