@@ -3,7 +3,7 @@ import random
 import argparse
 
 def sample_jsonl(directory, sample_size=20000):
-    jsonl_path = os.path.join(directory, 'deduplication.jsonl')
+    jsonl_path = os.path.join(directory, 'preprocessed.jsonl')
     sampled_path = os.path.join(directory, 'sampled.jsonl')
     
     if not os.path.isfile(jsonl_path):

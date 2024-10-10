@@ -4,9 +4,9 @@ SPARK_HOME=/opt/spark
 
 $SPARK_HOME/bin/spark-submit \
   --master spark://222.231.24.44:7077 \
-  --conf spark.executor.instances=40 \
-  --conf spark.executor.cores=8 \
-  --conf spark.executor.memory=64g \
+  --conf spark.executor.instances=100 \
+  --conf spark.executor.cores=10 \
+  --conf spark.executor.memory=120g \
   --conf spark.executor.memoryOverhead=8g \
   --conf spark.driver.memory=64g \
   --conf "spark.executor.extraJavaOptions=-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=35" \
