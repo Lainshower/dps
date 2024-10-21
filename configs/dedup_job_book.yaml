@@ -1,8 +1,10 @@
 base_dir: './legal-project-data'
 targets: 
-    - Domain-Book
+    # - Domain-Book
+    - Domain_Preprocessed_BOOK
 
-output_dir: './legal-project-data/Domain_First_Dedup_BOOK_0.8_16'
+# output_dir: './legal-project-data/Domain_First_Dedup_BOOK_0.8_16'
+output_dir: './legal-project-data/Domain_SECOND_Dedup_BOOK'
 
 n_dist: 500
 min_length: 20
