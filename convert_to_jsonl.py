@@ -13,8 +13,12 @@ def merge_json_parts(source_dir, output_file):
 
 def convert_and_merge_jsonl(directory_path, temp_dir, final_filename):
     spark = SparkSession.builder.appName("Convert and Merge JSONL") \
-        .config("spark.executor.memory", "16g") \
-        .config("spark.executor.cores", "4") \
+        .config("spark.driver.memory", "32g") \
+        .config("spark.executor.memory", "32g") \
+        .config("spark.memory.offHeap.enabled", "true") \
+        .config("spark.memory.offHeap.size", "32g") \
+        .config("spark.driver.maxResultSize", "4g") \
+        .master("local[*]") \
         .getOrCreate()
 
     part_file_path = f"{directory_path}/part-00000"
