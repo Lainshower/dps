@@ -1,8 +1,8 @@
 base_dir: './legal-project-data'
 targets:
-    - Domain_Preprocessed_CASE_LAW
+    - Domain-Case-Law-Public
 
-output_dir: './legal-project-data/Domain_SECOND_Dedup_CASE_LAW'
+output_dir: './legal-project-data/Domain-Public_First_Dedup_CASE_LAW_0.8_16'
 
 n_dist: 500
 min_length: 16
