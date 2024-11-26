@@ -1,6 +1,6 @@
 base_dir: './legal-project-data'
 targets: 
-    - Domain_First_Dedup_BOOK_0.8_16
+    - Domain_First_Dedup_BOOK_0.8_20
 
 output_dir: './legal-project-data/Domain_Preprocessed_BOOK_SYM_0.3_KWR_0.75'
 

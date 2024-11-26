@@ -1,8 +1,8 @@
 base_dir: './legal-project-data'
 targets: 
-    - Domain_First_Dedup_NON_CASE_LAW_0.8_10
+    - Domain-Public_First_Dedup_NON_CASE_LAW_0.8_10
 
-output_dir: './legal-project-data/Domain_Preprocessed_NON_CASE_LAW_SYM_0.3_KWR_0.7'
+output_dir: './legal-project-data/Domain-Public_Preprocessed_NON_CASE_LAW_SYM_0.3_KWR_0.7'
 
 n_dist: 100
 n_output: 1
